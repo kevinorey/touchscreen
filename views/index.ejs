@@ -10,11 +10,11 @@
     <div class="container">
       <fieldset>
         <form action="/" method="post">
-          <input name="city" type="text" class="ghost-input" placeholder="Enter a City" required>
-          <input type="submit" class="ghost-button" value="Get Weather">
+          <input name="liquorType" type="text" class="ghost-input" placeholder="Enter a Liquor Type" required>
+          <input type="submit" class="ghost-button" value="Get Liquor Types">
         </form>
-        <% if(weather !== null){ %>
-          <p><%= weather %></p>
+        <% if(data !== null){ %>
+          <p><%= data %></p>
         <% } %>
 
         <% if(error !== null){ %>
