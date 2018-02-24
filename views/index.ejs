@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Test</title>
+    <title>Barmate</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
   </head>
@@ -14,7 +14,14 @@
           <input type="submit" class="ghost-button" value="Get Liquor Types">
         </form>
         <% if(data !== null){ %>
-          <p><%= data %></p>
+			<table>
+				<% for(var i=0; i < data.length; i++) { %>
+					<tr>
+						<td><%= data[i].strDrink %></td>
+						<td><%= data[i].idDrink %></td>
+					</tr>
+				<% } %>
+			</table>
         <% } %>
 
         <% if(error !== null){ %>

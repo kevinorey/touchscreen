@@ -38,7 +38,7 @@ app.post('/', function (req, res) {
         res.render('index', {data: null, error: 'Returned data is invalid'});
       } else {
         let dataText = `It's ${data.drinks[1].strDrink} with ID ${data.drinks[1].idDrink}!`;
-        res.render('index', {data: dataText, error: null});
+        res.render('index', {data: data.drinks, error: null});
       }
     }
   });
