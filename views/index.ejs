@@ -13,11 +13,14 @@
           <input name="liquorType" type="text" class="ghost-input" placeholder="Enter a Liquor Type" required>
           <input type="submit" class="ghost-button" value="Get Liquor Types">
         </form>
+        <br>
         <% if(data !== null){ %>
 			<table>
 				<% for(var i=0; i < data.length; i++) { %>
 					<tr>
-						<td><%= data[i].strDrink %></td>
+						<td>
+						<a href='recipe/recipe?id=<%= data[i].idDrink %>'>
+                        <%= data[i].strDrink %></td>
 						<td><%= data[i].idDrink %></td>
 					</tr>
 				<% } %>
