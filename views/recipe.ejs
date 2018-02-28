@@ -9,12 +9,27 @@
   <body>
     <div class="container">
       <fieldset>
-		<table>
-			<tr>
-					<td>Detail Recipe</td>
-					<td><%= drinkId %></td>
-			</tr>
-		</table>
+		<% if(data !== null){ %>
+			<table>
+				<% for(var i=0; i < data.length; i++) { %>
+					<tr>
+						<td><img src="<%= data[i].strDrinkThumb %>" alt=""></td>
+					</tr>
+					<tr>
+						<td><%= data[i].idDrink %></td>
+					</tr>
+					<tr>
+						<td><%= data[i].strDrink %></td>
+					</tr>
+					<tr>
+						<td><%= data[i].strInstructions %></td>
+					</tr>
+				<% } %>
+			</table>
+        <% } %>
+		<% if(error !== null){ %>
+          <p><%= error %></p>
+        <% } %>
       </fieldset>
     </div>
   </body>

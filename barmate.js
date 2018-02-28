@@ -12,10 +12,34 @@ app.get('/', function (req, res) {
 })
 
 app.get('/recipe/recipe', (req, res) => {
-    //res.render('recipe', {recipe: null, error: null});
+    
+    // Grab id from request parameter to use to fetch cocktail details
     var id = req.param('id');
     console.log('recipe id = ', id);
-    res.render('recipe', {drinkId: id});
+    
+    // Build URL for cocktail receipe details
+    let url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+    console.log('URL = ', url);
+    
+    //Call cocktail details
+    request(url, function (err, response, body) {
+	  
+	//Check for error 
+    if(err){
+      res.render('recipe', {data: null, error: 'Failed to get detailed cocktail receipe'});
+      console.log('error:', err);
+      console.log('body:', body);
+    } else {
+      let data = JSON.parse(body)
+      console.log('body:', data);
+      if(data.drinks == undefined){
+        res.render('recipe', {data: null, error: 'Unable to find cocktail details'});
+      } else {
+        res.render('recipe', {data: data.drinks, error: null});
+      }
+    }
+  });
+   
 });
 
 app.post('/', function (req, res) {
@@ -29,8 +53,6 @@ app.post('/', function (req, res) {
 
   request(url, function (err, response, body) {
 	  
-	  //console.log('body = ', body);
-	  //console.log('response = ', response);
 	 
     if(err){
       res.render('index', {data: null, error: 'Failed to call url'});
