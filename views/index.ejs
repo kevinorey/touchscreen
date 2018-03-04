@@ -18,10 +18,10 @@
 			<table>
 				<% for(var i=0; i < data.length; i++) { %>
 					<tr>
+						<td><img src="<%= data[i].strDrinkThumb %>" width="100" height="100" alt=""></td>
 						<td>
 						<a href='recipe/recipe?id=<%= data[i].idDrink %>'>
                         <%= data[i].strDrink %></td>
-						<td><%= data[i].idDrink %></td>
 					</tr>
 				<% } %>
 			</table>

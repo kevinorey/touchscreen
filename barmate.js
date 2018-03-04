@@ -30,13 +30,14 @@ app.get('/recipe/recipe', (req, res) => {
       console.log('error:', err);
       console.log('body:', body);
     } else {
-      let data = JSON.parse(body)
-      console.log('body:', data);
-      if(data.drinks == undefined){
-        res.render('recipe', {data: null, error: 'Unable to find cocktail details'});
-      } else {
-        res.render('recipe', {data: data.drinks, error: null});
-      }
+		
+		let data = JSON.parse(body)
+		console.log('body:', data);
+		if(data.drinks == undefined){
+			res.render('recipe', {data: null, error: 'Unable to find cocktail details'});
+		} else {
+			res.render('recipe', {data: data.drinks, error: null});
+		}
     }
   });
    
@@ -52,19 +53,52 @@ app.post('/', function (req, res) {
   console.log('url', url);
 
   request(url, function (err, response, body) {
-	  
+	 
+	console.log('body = ', body);
 	 
     if(err){
       res.render('index', {data: null, error: 'Failed to call url'});
       console.log('error:', err);
       console.log('body:', body);
     } else {
-      let data = JSON.parse(body)
-      console.log('body:', data);
-      if(data.drinks == undefined){
-        res.render('index', {data: null, error: 'Returned data is invalid'});
-      } else {
-        res.render('index', {data: data.drinks, error: null});
+	  if ( body == null )
+	  {
+		  console.log('Null body returned');
+		  res.render('recipe', {data: null, error: 'Invalid liquor type'});
+		  console.log('error:', err);
+          console.log('body:', body);
+	  }
+	  else
+	  {
+		console.log('body is not null... checking undefined');
+		  
+		if ( body == undefined)
+		{
+			console.log('undefined returned');
+		    res.render('recipe', {data: null, error: 'Invalid liquor type'});
+		    console.log('error:', err);
+            console.log('body:', body);
+		}
+		
+		
+		if ( body.indexOf("undefined") == -1 )
+		{
+			console.log('undefined returned');
+		    res.render('index', {data: null, error: 'Invalid liquor type'});
+		    console.log('error:', err);
+            console.log('body:', body);
+		}
+		else
+		{
+		
+			let data = JSON.parse(body)
+			console.log('body:', data);
+			if(data.drinks == undefined){
+				res.render('index', {data: null, error: 'Returned data is invalid'});
+			} else {
+				res.render('index', {data: data.drinks, error: null});
+			}
+	    }
       }
     }
   });
