@@ -54,7 +54,8 @@ app.post('/', function (req, res) {
 
   request(url, function (err, response, body) {
 	 
-	console.log('body = ', body);
+	console.log('body = <', body, '>');
+	console.log('error: =<', err, '>');
 	 
     if(err){
       res.render('index', {data: null, error: 'Failed to call url'});
@@ -66,7 +67,7 @@ app.post('/', function (req, res) {
 		  console.log('Null body returned');
 		  res.render('recipe', {data: null, error: 'Invalid liquor type'});
 		  console.log('error:', err);
-          console.log('body:', body);
+          console.log('body:<', body, '>');
 	  }
 	  else
 	  {
@@ -74,23 +75,22 @@ app.post('/', function (req, res) {
 		  
 		if ( body == undefined)
 		{
-			console.log('undefined returned');
+			console.log('undefined returned body check');
 		    res.render('recipe', {data: null, error: 'Invalid liquor type'});
 		    console.log('error:', err);
             console.log('body:', body);
 		}
 		
-		
-		if ( body.indexOf("undefined") == -1 )
+		if ( body == '' )
 		{
-			console.log('undefined returned');
+			console.log('Blank string returned');
 		    res.render('index', {data: null, error: 'Invalid liquor type'});
 		    console.log('error:', err);
             console.log('body:', body);
 		}
 		else
 		{
-		
+			console.log('valid body going to parse json');
 			let data = JSON.parse(body)
 			console.log('body:', data);
 			if(data.drinks == undefined){
