@@ -11,6 +11,13 @@ app.get('/', function (req, res) {
   res.render('index', {data: null, error: null});
 })
 
+app.post('/getSearch', function (req, res) {
+
+  console.log('req = ', req.body);
+  console.log(req.body.searchByPicker);
+  //res.render('index', {data: null, error: null});
+})
+
 app.get('/recipe/recipe', (req, res) => {
     
     // Grab id from request parameter to use to fetch cocktail details
