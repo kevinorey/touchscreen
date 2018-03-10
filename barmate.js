@@ -47,6 +47,9 @@ app.post('/', function (req, res) {
   
   let liquorType = req.body.liquorType;
   console.log('liquor type = ', liquorType);
+  
+  if ( liquorType != undefined)
+  {
  
   let url = `http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${liquorType}`
   
@@ -81,6 +84,8 @@ app.post('/', function (req, res) {
             console.log('body:', body);
 		}
 		
+		console.log('index of = ', body.indexOf( '' ));
+		
 		if ( body == '' )
 		{
 			console.log('Blank string returned');
@@ -102,6 +107,7 @@ app.post('/', function (req, res) {
       }
     }
   });
+}
 })
 
 app.listen(3000, function () {

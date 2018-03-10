@@ -14,6 +14,24 @@
           <input type="submit" class="ghost-button" value="Get Recipes">
         </form>
         <br>
+        <br>
+        <form action="/" method="post">
+          <input name="drinkName" type="text" class="ghost-input" placeholder="Enter a Drink Name" required>
+          <input type="submit" class="ghost-button" value="Get Drink">
+        </form>
+        <br>
+        
+     <form id="tableForm" action="/getSearch" method="get">
+       <select  name="searchpicker">
+        <optgroup label="Search by">
+			<option name="" value="0">Search by</option>
+            <option name="liquor" value="1">Liquor</option>
+            <option name="drink" value="2">Drink Name</option>
+        </optgroup>
+       </select>
+     <input type="submit" />
+    </form> 
+      
         <% if(data !== null){ %>
 			<table>
 				<% for(var i=0; i < data.length; i++) { %>
