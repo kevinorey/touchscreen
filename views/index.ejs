@@ -9,19 +9,21 @@
   <body>
     <div class="container">
       <fieldset>
-        
-     <form id="tableForm" action="/getSearch" method="post">
-       <select  name="searchByPicker">
-        <optgroup label="Search by">
-			<option name="" value="0">Search by</option>
-            <option name="liquor" value="liquor">Liquor</option>
-            <option name="drink" value="drinkName">Drink Name</option>
-        </optgroup>
-       </select>
-     <input type="submit" />
-    </form> 
-
-        <% if(error !== null){ %>
+	     <form id="tableForm" action="/getSearch" method="post">
+	       <select  name="searchByPicker">
+	        <optgroup label="Search by">
+				<option name="" value="0">Search by</option>
+	            <option name="liquor" value="liquor">Liquor</option>
+	            <option name="drink" value="drinkName">Drink Name</option>
+	        </optgroup>
+	       </select>
+	     <input type="submit" />
+	    </form> 
+	    <br><br>
+	    <form id="inventoryForm" action="/viewInventory" method="get">
+	     <input type="submit" value="View Inventory"/>
+	    </form> 
+		<% if(error !== null){ %>
           <p><%= error %></p>
         <% } %>
       </fieldset>
