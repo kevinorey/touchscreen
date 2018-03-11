@@ -15,7 +15,34 @@ app.post('/getSearch', function (req, res) {
 
   console.log('req = ', req.body);
   console.log(req.body.searchByPicker);
-  //res.render('index', {data: null, error: null});
+  
+  var searchBy = req.body.searchByPicker
+  
+  if ( searchBy != undefined )
+  {
+	  //res.render('index', {data: null, error: null});
+	  
+	  if ( searchBy == 'liquor')
+	  {
+		  console.log('liquor search');
+		  res.render('liquorSearch', {data: null, error: null});
+	  }
+	  else if ( searchBy == 'drinkName')
+	  {
+		  console.log('drink search');
+		  res.render('drinkSearch', {data: null, error: null});
+	  }
+	  else
+	  {
+		  console.log('Invalid search option');
+		  res.render('index', {data: null, error: 'Please select a search by in drop down'});
+	  }
+  }
+  else
+  {
+	  console.log('Undefined search by option');
+	  //Error scenario  
+  }
 })
 
 app.get('/recipe/recipe', (req, res) => {
@@ -55,20 +82,23 @@ app.post('/', function (req, res) {
   let liquorType = req.body.liquorType;
   console.log('liquor type = ', liquorType);
   
+  let drinkName = req.body.drinkName;
+  console.log('drink name = ', drinkName);
+  
   if ( liquorType != undefined)
   {
  
-  let url = `http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${liquorType}`
+	let url = `http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${liquorType}`
   
-  console.log('url', url);
+	console.log('url', url);
 
-  request(url, function (err, response, body) {
+	request(url, function (err, response, body) {
 	 
 	console.log('body = <', body, '>');
 	console.log('error: =<', err, '>');
 	 
     if(err){
-      res.render('index', {data: null, error: 'Failed to call url'});
+      res.render('liquorSearch', {data: null, error: 'Failed to call url'});
       console.log('error:', err);
       console.log('body:', body);
     } else {
@@ -96,7 +126,7 @@ app.post('/', function (req, res) {
 		if ( body == '' )
 		{
 			console.log('Blank string returned');
-		    res.render('index', {data: null, error: 'Invalid liquor type'});
+		    res.render('liquorSearch', {data: null, error: 'Invalid liquor type'});
 		    console.log('error:', err);
             console.log('body:', body);
 		}
@@ -106,14 +136,19 @@ app.post('/', function (req, res) {
 			let data = JSON.parse(body)
 			console.log('body:', data);
 			if(data.drinks == undefined){
-				res.render('index', {data: null, error: 'Returned data is invalid'});
+				res.render('liquorSearch', {data: null, error: 'Returned data is invalid'});
 			} else {
-				res.render('index', {data: data.drinks, error: null});
+				res.render('liquorSearch', {data: data.drinks, error: null});
 			}
 	    }
       }
     }
   });
+}
+
+else if ( drinkName != undefined)
+{
+	console.log('Search by drink name specified');
 }
 })
 
