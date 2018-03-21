@@ -196,6 +196,11 @@ app.get('/viewInventory', function (req, res) {
 	res.render('viewInventory', { error: null});
 })
 
+
+app.get('/wineIndex', function (req, res) {
+	console.log("calling wine Index");
+	res.render('wineIndex', { error: null});
+})
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
